@@ -1,6 +1,6 @@
 var ApiActions = require('../actions/api_actions');
 
-ApiUtil = {
+var ApiUtil = {
   fetchBenches: function(){
     //make an api call using AJAX in here
     $.get('api/benches', {}, function(benches){
@@ -8,7 +8,5 @@ ApiUtil = {
     });
   }
 }
-
-window.ApiUtil = ApiUtil;
 
 module.exports = ApiUtil;

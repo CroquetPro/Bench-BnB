@@ -2,7 +2,7 @@
   "name": "BenchBnB",
   "version": "1.0.0",
   "description": "Sit on it",
-  "main": "index.js",
+  "main": "bench_bnb.jsx",
   "directories": {
     "test": "test"
   },

@@ -1,7 +1,10 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Router = require('react-router').Router;
-var Route = require('react-router').Route;
+var React = require('react'),
+    ReactDOM = require('react-dom'),
+    Router = require('react-router').Router,
+    Route = require('react-router').Route,
+    ApiUtil = require('./utils/api_util.js'),
+    BenchStore = require('./stores/bench'),
+    Search = require('./components/search');
 
 document.addEventListener('DOMContentLoaded', function () {
   // var routes = (<Route path="/" component={App} >
@@ -10,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
   //     </Route>
   //   </Route>);
   var content = document.querySelector('#content');
-  ReactDOM.render(<div>linked</div>, content);
+  ReactDOM.render(<div>
+                    <Search />
+                  </div>, content);
   // ReactDOM.render(<Router>{routes}</Router>, content);
 });

@@ -6,7 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 benches = [
-       { description: "Papalote", lat: 37.775785, lng: -122.445979 },
-       { description: "The Little Chihuahua", lat: 37.772045, lng: -122.437015 },
-       { description: "Cancun", lat: 37.781899, lng: -122.410426 }
+       { description: "Papalote", lat: 37.775785, long: -122.445979 },
+       { description: "The Little Chihuahua", lat: 37.772045, long: -122.437015 },
+       { description: "Cancun", lat: 37.781899, long: -122.410426 }
      ];
+
+benches.each{ |bench| Bench.create(bench) }
