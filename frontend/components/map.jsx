@@ -23,7 +23,20 @@ var Map = React.createClass({
     // this.listenForMove();
     //we are going to add a map marker for each burrito place now
     // this.props.benches.forEach(this.addBench);
+    this.storeToken = BenchStore.addListener(this._onChange);
+    this.mapToken = this.map.addListener('idle', ApiUtil.fetchBenches);
   },
+
+  _onChange: function(){
+    var benches = BenchStore.all();
+    benches.forEach(this.addBench);
+  },
+
+  componentWillUnmount: function(){
+    BenchStore.remove(this.storeToken);
+    map.remove(this.mapToken);
+  },
+
   addBench: function (bench) {
     //we make an instance of the google maps LatLng class, args are
     //(lat, lng)
@@ -36,10 +49,10 @@ var Map = React.createClass({
           //map property to null using myMarker.setMap(null)
           map: this.map
         });
-    marker.addListener('click', function () {
-      //when the marker is clicked on, alert the name
-      alert("clicked on: " + burritoPlace.name)
-    });
+    // marker.addListener('click', function () {
+    //   //when the marker is clicked on, alert the name
+    //   alert("clicked on: " + bench.description)
+    // });
   },
   // listenForMove: function(){
   //   //we listen for the map to emit an 'idle' event, it does this when

@@ -11,7 +11,6 @@ var Index = React.createClass({
 
   componentDidMount: function(){
     this.token = BenchStore.addListener(this._onChange);
-    ApiUtil.fetchBenches();
   },
 
   componentWillUnmount: function(){
