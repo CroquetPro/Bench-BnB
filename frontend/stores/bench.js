@@ -10,7 +10,6 @@ BenchStore.all = function () {
 };
 
 var resetBenches = function(benches){
-  console.log(benches);
   _benches = benches;
 };
 

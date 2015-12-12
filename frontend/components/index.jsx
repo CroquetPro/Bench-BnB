@@ -19,6 +19,8 @@ var Index = React.createClass({
 
   _onChange: function(){
       this.setState({ benches: BenchStore.all() })
+      console.log('Benches in index:');
+      console.log(this.state.benches);
   },
 
   render: function(){

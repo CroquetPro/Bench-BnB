@@ -19,17 +19,28 @@ var Map = React.createClass({
         };
     //this line actually creates the map and renders it into the DOM
     this.map = new google.maps.Map(map, mapOptions);
+    this.markers = [];
     //add a movement listener
     // this.listenForMove();
     //we are going to add a map marker for each burrito place now
     // this.props.benches.forEach(this.addBench);
     this.storeToken = BenchStore.addListener(this._onChange);
-    this.mapToken = this.map.addListener('idle', ApiUtil.fetchBenches);
+    this.mapToken = this.map.addListener('idle', function(){
+      var latlngBounds = this.getBounds();
+      var northeast = {lat: latlngBounds.getNorthEast().lat(),
+                       lng: latlngBounds.getNorthEast().lng()};
+      var southwest = {lat: latlngBounds.getSouthWest().lat(),
+                       lng: latlngBounds.getSouthWest().lng()};
+      var bounds = {northeast: northeast,
+                    southwest: southwest};
+      ApiUtil.fetchBenches(bounds);
+    });
   },
 
   _onChange: function(){
     var benches = BenchStore.all();
-    benches.forEach(this.addBench);
+    this.removeMarkers();
+    benches.forEach(this.addMarker);
   },
 
   componentWillUnmount: function(){
@@ -37,7 +48,13 @@ var Map = React.createClass({
     map.remove(this.mapToken);
   },
 
-  addBench: function (bench) {
+  removeMarkers: function(){
+    this.markers.forEach(function(marker){
+      marker.setMap(null);
+    });
+  },
+
+  addMarker: function (bench) {
     //we make an instance of the google maps LatLng class, args are
     //(lat, lng)
     var pos = new google.maps.LatLng(bench.lat, bench.long),
@@ -49,10 +66,11 @@ var Map = React.createClass({
           //map property to null using myMarker.setMap(null)
           map: this.map
         });
-    // marker.addListener('click', function () {
-    //   //when the marker is clicked on, alert the name
-    //   alert("clicked on: " + bench.description)
-    // });
+    this.markers.push(marker);
+    marker.addListener('click', function () {
+      //when the marker is clicked on, alert the name
+      alert("clicked on: " + bench.description)
+    });
   },
   // listenForMove: function(){
   //   //we listen for the map to emit an 'idle' event, it does this when

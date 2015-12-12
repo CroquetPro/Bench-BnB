@@ -1,9 +1,9 @@
 var ApiActions = require('../actions/api_actions');
 
 var ApiUtil = {
-  fetchBenches: function(){
+  fetchBenches: function(bounds){
     //make an api call using AJAX in here
-    $.get('api/benches', {}, function(benches){
+    $.get('api/benches', bounds, function(benches){
       ApiActions.receiveAll(benches);
     });
   }

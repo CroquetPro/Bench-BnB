@@ -1,6 +1,8 @@
 class Api::BenchesController < ApplicationController
   def index
-    render json: Bench.all
+    bounds = {northeast: params['northeast'],
+              southwest: params['southwest']}
+    render json: Bench.in_bounds(bounds)
   end
 
   def create
