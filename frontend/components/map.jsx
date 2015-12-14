@@ -1,7 +1,7 @@
 var React = require('react'),
     ReactDOM = require('react-dom'),
     BenchStore = require('../stores/bench'),
-    ApiUtil = require('../utils/api_util'),
+    FilterActions = require('../actions/filter_actions'),
     History = require('react-router').History;
 
 var Map = React.createClass({
@@ -36,7 +36,7 @@ var Map = React.createClass({
                        lng: latlngBounds.getSouthWest().lng()};
       var bounds = {northeast: northeast,
                     southwest: southwest};
-      ApiUtil.fetchBenches(bounds);
+      FilterActions.updateBounds(bounds);
     });
     this.map.addListener('click', function(event){
       var coords = {lat: event.latLng.lat(), lng: event.latLng.lng() }

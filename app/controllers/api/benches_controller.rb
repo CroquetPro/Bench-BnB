@@ -1,7 +1,10 @@
 class Api::BenchesController < ApplicationController
   def index
-    bounds = {northeast: params['northeast'],
-              southwest: params['southwest']}
+    bounds = { northeast: params['bounds']['northeast'],
+               southwest: params['bounds']['southwest'] }
+    seating = { min: params['seating']['min'],
+                max: params['seating']['max'] }
+    benches = []
     render json: Bench.in_bounds(bounds)
   end
 

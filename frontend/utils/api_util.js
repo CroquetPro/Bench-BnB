@@ -1,9 +1,10 @@
-var ApiActions = require('../actions/api_actions');
+var ApiActions = require('../actions/api_actions'),
+var FilterActions = require('../actions/filter_actions');
 
 var ApiUtil = {
-  fetchBenches: function(bounds){
+  fetchBenches: function(params){
     //make an api call using AJAX in here
-    $.get('api/benches', bounds, function(benches){
+    $.get('api/benches', params, function(benches){
       ApiActions.receiveAll(benches);
     });
   },

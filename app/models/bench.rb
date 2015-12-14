@@ -8,4 +8,6 @@ class Bench < ActiveRecord::Base
     lng_max = bounds[:northeast]['lng']
     return self.where(lat: (lat_min..lat_max)).where(long: (lng_min..lng_max))
   end
+
+  def self.
 end
