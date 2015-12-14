@@ -6,6 +6,11 @@ var ApiUtil = {
     $.get('api/benches', bounds, function(benches){
       ApiActions.receiveAll(benches);
     });
+  },
+  createBench: function(data){
+    $.post('api/benches', data, function(bench){
+      ApiActions.receiveBench(bench);
+    })
   }
 }
 

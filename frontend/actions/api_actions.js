@@ -8,6 +8,13 @@ var ApiActions = {
       actionType: BenchConstants.BENCHES_RECEIVED,
       benches: benches
     });
+  },
+
+  receiveBench: function(bench){
+    AppDispatcher.dispatch({
+      actionType: BenchConstants.BENCH_RECEIVED,
+      bench: bench
+    });
   }
 }
 

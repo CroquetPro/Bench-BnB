@@ -5,7 +5,8 @@ var React = require('react'),
     IndexRoute = require('react-router').IndexRoute,
     ApiUtil = require('./utils/api_util.js'),
     BenchStore = require('./stores/bench'),
-    Search = require('./components/search');
+    Search = require('./components/search'),
+    BenchForm = require('./components/bench_form');
 
 document.addEventListener('DOMContentLoaded', function () {
   var App = React.createClass({
@@ -20,7 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   var routes = (
     <Route path="/" component={App} >
-      <IndexRoute component={Search} />
+      <IndexRoute component={Search} ></IndexRoute>
+      <Route path="benches/new" component={BenchForm} />
     </Route>);
   var content = document.querySelector('#content');
   // ReactDOM.render(<div>

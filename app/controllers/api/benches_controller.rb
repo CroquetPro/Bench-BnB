@@ -6,6 +6,13 @@ class Api::BenchesController < ApplicationController
   end
 
   def create
-
+    bench = Bench.create({
+              lat: params['lat'],
+              long: params['long'],
+              description: params['description'],
+              seating: params['seating']
+              })
+    render json: bench
   end
+
 end

@@ -14,13 +14,11 @@ var Index = React.createClass({
   },
 
   componentWillUnmount: function(){
-    BenchStoreremove(this.token);
+    this.token.remove();
   },
 
   _onChange: function(){
-      this.setState({ benches: BenchStore.all() })
-      console.log('Benches in index:');
-      console.log(this.state.benches);
+      this.setState({ benches: BenchStore.all() });
   },
 
   render: function(){

@@ -1,9 +1,12 @@
 var React = require('react'),
     ReactDOM = require('react-dom'),
     BenchStore = require('../stores/bench'),
-    ApiUtil = require('../utils/api_util');
+    ApiUtil = require('../utils/api_util'),
+    History = require('react-router').History;
 
 var Map = React.createClass({
+  mixins: [History],
+
   componentDidMount: function () {
     //React.findDOMNode gets us a pointer to the actual html DOM element,
     //not its React component class instance, this is what
@@ -35,6 +38,10 @@ var Map = React.createClass({
                     southwest: southwest};
       ApiUtil.fetchBenches(bounds);
     });
+    this.map.addListener('click', function(event){
+      var coords = {lat: event.latLng.lat(), lng: event.latLng.lng() }
+      this.history.pushState(null, "benches/new", coords);
+    }.bind(this));
   },
 
   _onChange: function(){
@@ -44,8 +51,8 @@ var Map = React.createClass({
   },
 
   componentWillUnmount: function(){
-    BenchStore.remove(this.storeToken);
-    map.remove(this.mapToken);
+    this.storeToken.remove();
+    this.mapToken.remove();
   },
 
   removeMarkers: function(){
@@ -72,6 +79,7 @@ var Map = React.createClass({
       alert("clicked on: " + bench.description)
     });
   },
+
   // listenForMove: function(){
   //   //we listen for the map to emit an 'idle' event, it does this when
   //   //the map stops moving

@@ -16,10 +16,13 @@ var resetBenches = function(benches){
 BenchStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
     case BenchConstants.BENCHES_RECEIVED:
-      var result = resetBenches(payload.benches);
-      BenchStore.__emitChange();
+      resetBenches(payload.benches);
+      break;
+    case BenchConstants.BENCH_RECEIVED:
+      _benches.push(payload.bench);
       break;
     }
+    BenchStore.__emitChange();
   }
 
 module.exports = BenchStore;
