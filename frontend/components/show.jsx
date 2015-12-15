@@ -18,6 +18,7 @@ var Show = React.createClass({
   render: function(){
     return(
       <div id="show">
+
         <Map bench={this.state.bench} />
         <label>Description:
           {this.state.bench.description}

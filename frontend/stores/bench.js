@@ -31,6 +31,8 @@ BenchStore.__onDispatch = function (payload) {
       _benches.push(payload.bench);
       break;
     }
+    console.log(_benches);
+
     BenchStore.__emitChange();
   }
 
