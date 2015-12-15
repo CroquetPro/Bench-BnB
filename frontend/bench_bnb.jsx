@@ -6,6 +6,7 @@ var React = require('react'),
     ApiUtil = require('./utils/api_util.js'),
     BenchStore = require('./stores/bench'),
     Search = require('./components/search'),
+    Show = require('./components/show'),
     BenchForm = require('./components/bench_form');
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <Route path="/" component={App} >
       <IndexRoute component={Search} ></IndexRoute>
       <Route path="benches/new" component={BenchForm} />
+      <Route path="benches/:benchId" component={Show} />
     </Route>);
   var content = document.querySelector('#content');
   // ReactDOM.render(<div>

@@ -18,8 +18,6 @@ var BenchForm = React.createClass({
                 long: this.state.long,
                 description: this.state.description,
                 seating: this.state.seating};
-    console.log("postData:");
-    console.log(postData);
     ApiUtil.createBench(postData);
     this.setState({lat: 37.7758, long: -122.435, description: "", seating: null});
     this.history.pushState(null, "/");

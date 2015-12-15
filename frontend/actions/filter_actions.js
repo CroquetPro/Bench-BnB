@@ -8,6 +8,13 @@ var FilterActions = {
       actionType: FilterConstants.BOUNDS_RECEIVED,
       bounds: bounds
     });
+  },
+
+  updateSeating: function(seating){
+    AppDispatcher.dispatch({
+      actionType: FilterConstants.SEATING_RECEIVED,
+      seating: seating
+    });
   }
   // receiveAll: function(benches){
   //   AppDispatcher.dispatch({

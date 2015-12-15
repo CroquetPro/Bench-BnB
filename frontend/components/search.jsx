@@ -3,11 +3,12 @@ var React = require('react'),
     FilterParamsStore = require('../stores/filter_params'),
     ApiUtil = require('../utils/api_util'),
     Map = require('./map'),
+    Seating = require('./seating'),
     Index = require('./index');
 
 var Search = React.createClass({
   getInitialState: function(){
-    return (this.resetState());
+    return ({params: FilterParamsStore.all()});
   },
 
   componentDidMount: function(){
@@ -17,7 +18,7 @@ var Search = React.createClass({
   _onChange: function(){
     this.resetState();
     ApiUtil.fetchBenches();
-  }
+  },
 
   resetState: function(){
     this.setState(FilterParamsStore.all());
@@ -30,6 +31,7 @@ var Search = React.createClass({
   render: function(){
     return(
       <div className='search'>
+        <Seating />
         <Map />
         <Index />
       </div>

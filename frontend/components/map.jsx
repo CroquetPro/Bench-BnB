@@ -13,15 +13,15 @@ var Map = React.createClass({
     //google maps wants to render the map into
     //this.refs is an object populated by giving children a 'ref' prop
     //when we render
-    var map = ReactDOM.findDOMNode(this.refs.map),
     //we make these options so when the map loads up it displays a
     //good location and zoom level, zoom of 13 show most of SF
-        mapOptions = {
+    var mapOptions = {
           center: { lat: 37.7758, lng: -122.435 },
           zoom: 13
         };
+
+    this.makeMap(mapOptions);
     //this line actually creates the map and renders it into the DOM
-    this.map = new google.maps.Map(map, mapOptions);
     this.markers = [];
     //add a movement listener
     // this.listenForMove();
@@ -42,6 +42,19 @@ var Map = React.createClass({
       var coords = {lat: event.latLng.lat(), lng: event.latLng.lng() }
       this.history.pushState(null, "benches/new", coords);
     }.bind(this));
+  },
+
+  makeMap: function(mapOptions){
+    var map = ReactDOM.findDOMNode(this.refs.map)
+    this.map = new google.maps.Map(map, mapOptions);
+  },
+
+  componentWillReceiveProps: function(newProps){
+    if(typeof newProps.bench === 'undefined') {return;}
+    var mapCenter = { lat: newProps.bench.lat,
+                      lng: newProps.bench.long };
+    var mapOptions = { center: mapCenter, zoom: 20 };
+    this.makeMap(mapOptions);
   },
 
   _onChange: function(){
@@ -74,10 +87,12 @@ var Map = React.createClass({
           map: this.map
         });
     this.markers.push(marker);
+
     marker.addListener('click', function () {
       //when the marker is clicked on, alert the name
-      alert("clicked on: " + bench.description)
-    });
+      url = "benches/" + bench.id;
+      this.history.pushState(null, url);
+    }.bind(this));
   },
 
   // listenForMove: function(){

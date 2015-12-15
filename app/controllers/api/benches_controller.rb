@@ -4,8 +4,8 @@ class Api::BenchesController < ApplicationController
                southwest: params['bounds']['southwest'] }
     seating = { min: params['seating']['min'],
                 max: params['seating']['max'] }
-    benches = []
-    render json: Bench.in_bounds(bounds)
+
+    render json: Bench.in_params(bounds, seating)
   end
 
   def create

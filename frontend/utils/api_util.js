@@ -1,9 +1,10 @@
 var ApiActions = require('../actions/api_actions'),
-var FilterActions = require('../actions/filter_actions');
+    FilterActions = require('../actions/filter_actions'),
+    FilterParamsStore = require('../stores/filter_params');
 
 var ApiUtil = {
-  fetchBenches: function(params){
-    //make an api call using AJAX in here
+  fetchBenches: function(){
+    var params = FilterParamsStore.all();
     $.get('api/benches', params, function(benches){
       ApiActions.receiveAll(benches);
     });

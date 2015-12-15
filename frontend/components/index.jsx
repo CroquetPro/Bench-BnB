@@ -1,8 +1,11 @@
 var React = require('react'),
     BenchStore = require('../stores/bench'),
-    ApiUtil = require('../utils/api_util');
+    ApiUtil = require('../utils/api_util'),
+    History = require('react-router').History;
+
 
 var Index = React.createClass({
+  mixins: [History],
 
   getInitialState: function(){
     return({ benches: BenchStore.all()
@@ -21,13 +24,19 @@ var Index = React.createClass({
       this.setState({ benches: BenchStore.all() });
   },
 
+  handleClick: function(event){
+    console.log(event.target.getAttribute('data-id'));
+    url = "benches/" + event.target.getAttribute('data-id');
+    this.history.pushState(null, url);
+  },
+
   render: function(){
-    var benches = this.state.benches.map(function(bench, index){
-      return <li key={index} className='bench'>{bench.description}</li>
+    var benches = this.state.benches.map(function(bench){
+      return <li key={bench.id} className='bench' data-id={bench.id}>{bench.description}</li>
     });
     return(
       <div className='index'>
-        <ul className='list'>
+        <ul className='list' onClick={this.handleClick}>
           {benches}
         </ul>
       </div>
